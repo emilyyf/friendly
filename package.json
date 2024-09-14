@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev": "concurrently \"go run backend/cmd/main.go\" \"bun run --cwd frontend dev\" "
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "vite": "^5.4.5"
+  }
+}
