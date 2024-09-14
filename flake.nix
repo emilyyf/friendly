@@ -19,11 +19,12 @@
           packages = with pkgs; [
             go
             nodejs
-            zsh
+            bun
+            nushell
           ];
 
           shellHook = ''
-            exec zsh
+            exec nu
           '';
         };
       }
