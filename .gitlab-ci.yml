@@ -1,31 +1,22 @@
-stages:
-  - frontend
-  - backend
+image: oven/bun:latest
 
 cache:
   paths:
-    - frontend/node_modules/
-    - frontend/.svelte-kit/
-    - backend/friendly-backend/
+    - node_modules/
+    - .svelte-kit/
 
-frontend:
-  image: oven/bun:latest
-  stage: frontend
+before_script:
+  - bun install
+
+lint:
   script:
-    - bun install --cwd frontend
-    - bun run --cwd frontend build
+    - bun run lint
+
+build:
+  script:
+    - bun run build
   artifacts:
     paths:
-      - frontend/node_modules/
-      - frontend/.svelte-kit/
+      - node_modules/
+      - .svelte-kit/
 
-back:
-  image: golang:latest
-  stage: backend
-  script:
-    - test -z "$(gofmt -l backend)"
-    - mkdir -p backend/friendly-backend
-    - go build -C backend -o friendly-backend  ./...
-  artifacts:
-    paths:
-      - backend/friendly-backend
