@@ -2,3 +2,9 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Why
+.gitlab-ci.yml
+docker-compose.yml
+flake.lock
+README.md
