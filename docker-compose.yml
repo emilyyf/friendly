@@ -1,43 +1,11 @@
 services:
-  friendly_back:
-    container_name: friendly_back
-    image: friendly_backend:latest
-    ports:
-      - "3000:3000"
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    volumes:
-      - ./backend:/backend
-    depends_on:
-      - postgres
-  friendly_front:
-    container_name: friendly_front
-    image: friendly_front:latest
+  friendly:
+    container_name: friendly
+    image: friendly:latest
     ports:
       - "5173:5173"
     build:
-      context: ./frontend
+      context: .
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/frontend
-    depends_on:
-      - friendly_back
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    ports:
-      - '6500:5432'
-    volumes:
-      - postgresDB:/data/postgres
-    env_file:
-      - .env
-  pgAdmin:
-    image: dpage/pgadmin4
-    container_name: pgAdmin
-    env_file:
-      - .env
-    ports:
-      - "5050:80"
-volumes:
-  postgresDB:
+      - .:/friendly
