@@ -107,6 +107,16 @@
 				"useGetterReturn": "error",
 				"useNamespaceKeyword": "error",
 				"useValidTypeof": "error"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"level": "error",
+					"fix": "unsafe",
+					"options": {
+						"attributes": ["class", "className"],
+						"functions": ["tw"]
+					}
+				}
 			}
 		},
 		"ignore": ["build/", ".svelte-kit/", "dist/", "src/App.d.ts"]
