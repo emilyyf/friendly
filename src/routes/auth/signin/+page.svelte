@@ -1,9 +1,40 @@
-<script>
-import { Checkbox, Input, Label } from 'flowbite-svelte';
+<script lang="ts">
+  import { Checkbox, Input, Label } from "flowbite-svelte";
+  import { localStore } from "$lib/localStore.svelte";
+  import { goto } from "$app/navigation";
+
+  let email = $state("");
+  let password = $state("");
+  let error = $state("");
+
+  async function handleSubmit(e: Event) {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const { token } = await response.json();
+        localStore("token", token);
+        goto("/home");
+      } else {
+        error = "Email ou senha inválidos";
+      }
+    } catch (err) {
+      console.log(err);
+      error = "Failed to login";
+    }
+  }
 </script>
 
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-  <form class="space-y-6" action="#">
+  {#if error}{error}{/if}
+  <form class="space-y-6" onsubmit={handleSubmit}>
     <fieldset>
       <Label for="email" class="mb-2">E-mail</Label>
       <Input
@@ -12,6 +43,7 @@ import { Checkbox, Input, Label } from 'flowbite-svelte';
         type="text"
         autocomplete="email"
         placeholder="fulano@anjoamigo.com.br"
+        bind:value={email}
         required
       />
     </fieldset>
@@ -24,6 +56,7 @@ import { Checkbox, Input, Label } from 'flowbite-svelte';
         type="password"
         autocomplete="current-password"
         placeholder="•••••••••"
+        bind:value={password}
         required
       />
     </fieldset>
@@ -31,7 +64,9 @@ import { Checkbox, Input, Label } from 'flowbite-svelte';
     <div class="grid grid-cols-2">
       <Checkbox>Manter conectado</Checkbox>
       <div class="text-sm text-end">
-        <a href="/recover-password" class="font-semibold text-isdigo-600 hover:text-indigo-500"
+        <a
+          href="/recover-password"
+          class="font-semibold text-isdigo-600 hover:text-indigo-500"
           >Esqueceu a senha?</a
         >
       </div>
