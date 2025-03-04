@@ -1,34 +1,51 @@
 <script lang="ts">
   import { Checkbox, Input, Label } from "flowbite-svelte";
-  import { localStore } from "$lib/localStore.svelte";
+  import { UserStorage, getUserStore } from "$lib/userStorage.svelte";
   import { goto } from "$app/navigation";
 
   let email = $state("");
   let password = $state("");
   let error = $state("");
 
-  async function handleSubmit(e: Event) {
+  // This should probably be refactored
+  function handleSubmit(e: Event) {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+    const userStore = getUserStore();
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          response.json().then(({ token }) => {
+            fetch("http://localhost:3000/profile", {
+              method: "GET",
+              headers: {
+                Authorization: token,
+              },
+            })
+              .then((res) =>
+                res.json().then((user) => {
+                  userStore.value = new UserStorage(user, token, true);
+                  goto("/home");
+                }),
+              )
+              .catch((e) => {
+                console.log(e);
+                error = "Failed to login";
+              });
+          });
+        } else {
+          error = "Email ou senha inválidos";
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        error = "Failed to login";
       });
-
-      if (response.ok) {
-        const { token } = await response.json();
-        localStore("token", token);
-        goto("/home");
-      } else {
-        error = "Email ou senha inválidos";
-      }
-    } catch (err) {
-      console.log(err);
-      error = "Failed to login";
-    }
   }
 </script>
 

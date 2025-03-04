@@ -1,30 +1,12 @@
 <script lang="ts">
-  import { localStore } from "$lib/localStore.svelte";
+  import { UserStorage, getUser } from "$lib/userStorage.svelte";
 
-  let user = $state("");
-  let logged_in = $state(false);
-  let token = localStore("token", null).value;
-
-  if (token) {
-    fetch("http://localhost:3000/profile", {
-      method: "GET",
-      headers: {
-        Authorization: token,
-      },
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then((u) => {
-          user = u.email;
-          logged_in = true;
-        });
-      }
-    });
-  }
+  let user: UserStorage = getUser();
 </script>
 
 <div>
   <h1>Anjo Amigo</h1>
-  {#if logged_in}
-    <h2>Hello {user}</h2>
+  {#if user != null && user.logged}
+    <h2>Hello {user.user.email}</h2>
   {/if}
 </div>
