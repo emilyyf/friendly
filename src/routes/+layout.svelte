@@ -1,5 +1,5 @@
 <script>
-import '../app.css';
+	import '../app.css';
 </script>
 
 <!-- Children routes are rendered here -->

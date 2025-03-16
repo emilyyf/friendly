@@ -1,0 +1,17 @@
+# Package Managers
+bun.lockb
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Output
+.output
+.vercel
+.svelte-kit
+/build
+
+# Why
+.gitlab-ci.yml
+docker-compose.yml
+flake.lock
+README.md

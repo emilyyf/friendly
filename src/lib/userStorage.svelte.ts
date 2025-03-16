@@ -23,6 +23,6 @@ export function getUser(): UserStorage {
 }
 
 export function clearUser() {
-	let store = getUserStore();
+	const store = getUserStore();
 	store.value = clean;
 }
