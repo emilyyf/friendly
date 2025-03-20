@@ -5,9 +5,6 @@
 			src="https://wallpapercave.com/wp/wp10739235.png"
 			alt="Anjo Amigo"
 		/>
-		<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-			Acesse sua conta
-		</h2>
 	</div>
 
 	<slot />
