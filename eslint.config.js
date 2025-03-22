@@ -30,4 +30,25 @@ export default [
 	{
 		ignores: ['build/', '.svelte-kit/', 'dist/'],
 	},
+	{
+		rules: {
+			'@typescript-eslint/naming-convention': [
+				'error',
+				{
+					selector: 'import',
+					format: ['snake_case', 'camelCase', 'PascalCase'],
+				},
+				{
+					selector: 'variable',
+					format: ['snake_case', 'UPPER_CASE'],
+					leadingUnderscore: 'allow',
+					trailingUnderscore: 'allow',
+				},
+				{
+					selector: 'typeLike',
+					format: ['PascalCase'],
+				},
+			],
+		},
+	},
 ];

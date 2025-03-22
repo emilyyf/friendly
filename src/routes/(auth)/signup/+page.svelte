@@ -10,6 +10,19 @@
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 	<form class="space-y-6" method="post" use:enhance>
 		<fieldset>
+			<Label for="form-signup.name" class="mb-2">Nome</Label>
+			<Input
+				id="form-signup.name"
+				name="name"
+				type="text"
+				autocomplete="name"
+				placeholder="Fulano"
+				value={form?.name ?? ''}
+				required
+			/>
+		</fieldset>
+
+		<fieldset>
 			<Label for="form-signup.email" class="mb-2">E-mail</Label>
 			<Input
 				id="form-signup.email"

@@ -2,6 +2,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoadEvent, RequestEvent } from './$types';
 import { verifyEmailInput } from '$lib/server/email';
 import { verifyPasswordStrength } from '$lib/server/password';
+import { createUser } from '$lib/server/user';
+import { createSession, generateSessionToken, setSessionTokenCookie } from '$lib/server/session';
 
 export function load(event: PageServerLoadEvent) {
 	if (event.locals.session != null && event.locals.user != null) {
@@ -16,43 +18,38 @@ export const actions: Actions = {
 };
 
 async function action(event: RequestEvent) {
-	const formData = await event.request.formData();
-	const email = formData.get('email');
-	const password = formData.get('password');
+	const form_data = await event.request.formData();
+	const name = form_data.get('name') as string;
+	const email = form_data.get('email') as string;
+	const password = form_data.get('password') as string;
 
-	if (typeof email != 'string' || typeof password != 'string') {
-		console.log('Invalid or missing fields');
+	if (name == '' || email == '' || password == '') {
 		return fail(400, {
-			message: 'Invalid or missing fields',
+			message: 'Please enter your name, email and password',
 			email: '',
 		});
 	}
 
-	if (email == '' || password == '') {
-		console.log('Please enter your email and password');
-		return fail(400, {
-			message: 'Please enter your email and password',
-			email: '',
-		});
-	}
-
-	const emailVerification = await verifyEmailInput(email);
-	if (!emailVerification) {
-		console.log('Invalid email');
+	const email_verification = await verifyEmailInput(email);
+	if (!email_verification) {
 		return fail(400, {
 			message: 'Invalid email',
 			email,
 		});
 	}
 
-	const strongPassword = await verifyPasswordStrength(password);
-	if (!strongPassword) {
-		console.log('Weak password');
+	const strong_password = await verifyPasswordStrength(password);
+	if (!strong_password) {
 		return fail(400, {
 			message: 'Weak password',
 			email,
 		});
 	}
 
-	console.log('Everything ok, create the user');
+	const user = await createUser(name, email, password);
+	const session_token = generateSessionToken();
+	const session = await createSession(session_token, user.id);
+	setSessionTokenCookie(event, session_token, session.expires_at);
+
+	redirect(302, '/');
 }

@@ -10,7 +10,7 @@
 	// This should probably be refactored
 	function handleSubmit(e: Event) {
 		e.preventDefault();
-		const userStore = getUserStore();
+		const user_store = getUserStore();
 		fetch('http://localhost:3000/login', {
 			method: 'POST',
 			headers: {
@@ -29,7 +29,7 @@
 						})
 							.then((res) =>
 								res.json().then((user) => {
-									userStore.value = new UserStorage(user, token, true);
+									user_store.value = new UserStorage(user, token, true);
 									goto('/home');
 								}),
 							)

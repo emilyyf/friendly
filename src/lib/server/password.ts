@@ -20,13 +20,13 @@ export async function verifyPasswordStrength(password: string): Promise<boolean>
 		return false;
 	}
 	const hash = encodeHexLowerCase(sha1(new TextEncoder().encode(password)));
-	const hashPrefix = hash.slice(0, 5);
-	const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
+	const hash_prefix = hash.slice(0, 5);
+	const response = await fetch(`https://api.pwnedpasswords.com/range/${hash_prefix}`);
 	const data = await response.text();
 	const items = data.split('\n');
 	for (const item of items) {
-		const hashSuffix = item.slice(0, 35).toLowerCase();
-		if (hash === hashPrefix + hashSuffix) {
+		const hash_suffix = item.slice(0, 35).toLowerCase();
+		if (hash === hash_prefix + hash_suffix) {
 			return false;
 		}
 	}
