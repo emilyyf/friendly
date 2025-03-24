@@ -9,6 +9,7 @@ yarn.lock
 .vercel
 .svelte-kit
 /build
+/drizzle
 
 # Why
 .gitlab-ci.yml
