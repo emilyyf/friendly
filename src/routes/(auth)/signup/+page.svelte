@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { Input, Label } from 'flowbite-svelte';
-	import { enhance } from '$app/forms';
-	let { form } = $props();
+	import { superForm } from 'sveltekit-superforms/client';
+
+	let { data } = $props();
+
+	const { form, enhance, errors, message } = superForm(data.form);
 </script>
 
 <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -9,6 +12,12 @@
 </h2>
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 	<form class="space-y-6" method="post" use:enhance>
+		{#if $message}
+			<div class="bg:red-60 p:30 m:20 font:bold fg:black r:3">
+				{$message}
+			</div>
+		{/if}
+
 		<fieldset>
 			<Label for="form-signup.name" class="mb-2">Nome</Label>
 			<Input
@@ -17,9 +26,10 @@
 				type="text"
 				autocomplete="name"
 				placeholder="Fulano"
-				value={form?.name ?? ''}
+				value={$form.name}
 				required
 			/>
+			{#if $errors.name}<div class="invalid">{$errors.name}</div>{/if}
 		</fieldset>
 
 		<fieldset>
@@ -30,9 +40,10 @@
 				type="text"
 				autocomplete="email"
 				placeholder="fulano@anjoamigo.com.br"
-				value={form?.email ?? ''}
+				value={$form.email}
 				required
 			/>
+			{#if $errors.email}<div class="invalid">{$errors.email}</div>{/if}
 		</fieldset>
 
 		<fieldset>
@@ -43,9 +54,10 @@
 				type="password"
 				autocomplete="current-password"
 				placeholder="•••••••••"
-				value={form?.password ?? ''}
+				value={$form.password}
 				required
 			/>
+			{#if $errors.password}<div class="invalid">{$errors.password}</div>{/if}
 		</fieldset>
 
 		<div>
@@ -53,9 +65,8 @@
 				type="submit"
 				class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 			>
-				Cadastradar
+				Cadastrar
 			</button>
 		</div>
-		<p>{form?.message ?? ''}</p>
 	</form>
 </div>
