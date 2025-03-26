@@ -1,6 +1,7 @@
 import { integer, pgTable, varchar, timestamp } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
 import { db } from '..';
+import { users_table, type SelectUser } from './user';
 
 export const sessions_table = pgTable('sessions', {
 	id: varchar({ length: 255 }).primaryKey().notNull(),
@@ -15,6 +16,15 @@ export async function getSessionById(id: SelectSession['id']): Promise<Array<Sel
 	return db.select().from(sessions_table).where(eq(sessions_table.id, id));
 }
 
+export async function getUserFromSession(id: SelectSession['id']): Promise<SelectUser> {
+	const session = await db.select().from(sessions_table).where(eq(sessions_table.id, id));
+	return (await db.select().from(users_table).where(eq(users_table.id, session[0].user_id)))[0];
+}
+
 export async function insertSession(data: InsertSession): Promise<Array<SelectSession>> {
 	return await db.insert(sessions_table).values(data).returning();
+}
+
+export async function deleteSession(id: SelectSession['id']) {
+	return await db.delete(sessions_table).where(eq(sessions_table.id, id));
 }

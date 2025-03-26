@@ -7,7 +7,7 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 export const load = (async ({ locals }) => {
-	if (locals.session != null && locals.user != null) redirect(302, '/');
+	if (locals.session != null && locals.user != null) redirect(302, '/home');
 
 	const form = await superValidate(zod(schema));
 
@@ -24,8 +24,8 @@ export const actions = {
 		const user = await createUser(name, email, password);
 		const session_token = generateSessionToken();
 		const session = await createSession(session_token, user.id);
-		setSessionTokenCookie(event, session_token, session.expires_at);
+		setSessionTokenCookie(event, session.id, session.expires_at);
 
-		redirect(302, '/');
+		redirect(302, '/home');
 	},
 } satisfies Actions;

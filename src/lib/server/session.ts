@@ -1,7 +1,13 @@
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding';
 import { sha256 } from '@oslojs/crypto/sha2';
-import { insertSession, type InsertSession, type SelectSession } from '$lib/db/schemas/session';
+import {
+	deleteSession,
+	insertSession,
+	type InsertSession,
+	type SelectSession,
+} from '$lib/db/schemas/session';
 import type { RequestEvent } from '../../routes/(auth)/signup/$types';
+import { redirect } from '@sveltejs/kit';
 
 export function generateSessionToken(): string {
 	const token_bytes = new Uint8Array(20);
@@ -39,4 +45,11 @@ export function deleteSessionTokenCookie(event: RequestEvent) {
 		sameSite: 'lax',
 		maxAge: 0,
 	});
+}
+
+export async function logout(event: RequestEvent) {
+	event.locals.user = undefined;
+	await deleteSession(event.cookies.get('session')!);
+	deleteSessionTokenCookie(event);
+	redirect(302, '/login');
 }
