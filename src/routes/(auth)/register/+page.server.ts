@@ -1,10 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from '@sveltejs/kit';
 import { createUser } from '$lib/server/user';
 import { createSession, generateSessionToken, setSessionTokenCookie } from '$lib/server/session';
 import { schema } from './schema';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals }) => {
 	if (locals.session != null && locals.user != null) redirect(302, '/home');

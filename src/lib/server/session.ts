@@ -6,8 +6,7 @@ import {
 	type InsertSession,
 	type SelectSession,
 } from '$lib/db/schemas/session';
-import type { RequestEvent } from '../../routes/(auth)/signup/$types';
-import { redirect } from '@sveltejs/kit';
+import { redirect, type RequestEvent } from '@sveltejs/kit';
 
 export function generateSessionToken(): string {
 	const token_bytes = new Uint8Array(20);

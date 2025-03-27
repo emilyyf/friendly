@@ -52,12 +52,24 @@
 				id="form-signup.password"
 				name="password"
 				type="password"
-				autocomplete="current-password"
 				placeholder="•••••••••"
 				value={$form.password}
 				required
 			/>
 			{#if $errors.password}<div class="invalid">{$errors.password}</div>{/if}
+		</fieldset>
+
+		<fieldset>
+			<Label for="form-signup.confirm_password" class="mb-2">Confirme sua senha</Label>
+			<Input
+				id="form-signup.confirm_password"
+				name="confirm_password"
+				type="password"
+				placeholder="•••••••••"
+				value={$form.confirm_password}
+				required
+			/>
+			{#if $errors.confirm}<div class="invalid">{$errors.confirm}</div>{/if}
 		</fieldset>
 
 		<div>

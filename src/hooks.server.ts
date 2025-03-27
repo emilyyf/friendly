@@ -6,11 +6,10 @@ import { sequence } from '@sveltejs/kit/hooks';
 const auth = (async ({ event, resolve }) => {
 	const { cookies } = event;
 	const token = cookies.get('session');
-	const secure_route = true; // event.route.id?.includes('(secure)');
-	const login_route = event.url.pathname.includes('/login'); // Detect login form.
-	const registration_route = event.url.pathname.includes('/signup'); // Detect registration form.
+	const secure_route = event.route.id?.includes('(secure)');
+	const login_route = event.url.pathname.includes('/login');
+	const registration_route = event.url.pathname.includes('/register');
 	const auth_route = login_route || registration_route;
-	console.log(token);
 
 	if (token && secure_route) {
 		const session = await getSessionById(token);

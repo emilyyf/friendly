@@ -16,8 +16,9 @@ export async function getSessionById(id: SelectSession['id']): Promise<Array<Sel
 	return db.select().from(sessions_table).where(eq(sessions_table.id, id));
 }
 
-export async function getUserFromSession(id: SelectSession['id']): Promise<SelectUser> {
+export async function getUserFromSession(id: SelectSession['id']): Promise<SelectUser | null> {
 	const session = await db.select().from(sessions_table).where(eq(sessions_table.id, id));
+	if (!session[0]) return null;
 	return (await db.select().from(users_table).where(eq(users_table.id, session[0].user_id)))[0];
 }
 

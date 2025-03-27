@@ -22,7 +22,8 @@
 	<NavHamburger />
 	<NavUl {activeUrl}>
 		<NavLi href="/home">Home</NavLi>
-		<NavLi href="/user">{locals.user.name ?? 'Register'}</NavLi>
+		<NavLi href="/user">{locals.user?.name ?? 'Register'}</NavLi>
+		<NavLi><form method="post" action="/?/logout"><button>Logout</button></form></NavLi>
 	</NavUl>
 </Navbar>
 
