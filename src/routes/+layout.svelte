@@ -1,31 +1,29 @@
 <script lang="ts">
 	import '../app.css';
-	import { page } from '$app/stores';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
 
 	let { data, children } = $props();
-	let activeUrl = $state($page.url.pathname);
 	let { locals } = data;
 </script>
 
 <!-- Children routes are rendered here -->
-<Navbar>
-	<NavBrand href="/home">
+<div class="navbar">
+	<div class="flex-1">
 		<img
 			class="mx-auto h-6 w-auto"
 			src="https://wallpapercave.com/wp/wp10739235.png"
 			alt="Anjo Amigo"
 		/>
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Friendly</span
+		<a href="/home" class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+			>Friendly</a
 		>
-	</NavBrand>
-	<NavHamburger />
-	<NavUl {activeUrl}>
-		<NavLi href="/home">Home</NavLi>
-		<NavLi href="/user">{locals.user?.name ?? 'Register'}</NavLi>
-		<NavLi><form method="post" action="/?/logout"><button>Logout</button></form></NavLi>
-	</NavUl>
-</Navbar>
+	</div>
+	<div class="flex-none">
+		<ul class="menu menu-horizontal px-1">
+			<li><a href="/user">{locals.user?.name ?? 'Register'}</a></li>
+			<li><form method="post" action="/?/logout"><button>Logout</button></form></li>
+		</ul>
+	</div>
+</div>
 
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 	{@render children?.()}

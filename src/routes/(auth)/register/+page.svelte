@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Input, Label } from 'flowbite-svelte';
 	import { superForm } from 'sveltekit-superforms/client';
+	import '../../../app.css';
 
 	let { data } = $props();
 
@@ -19,8 +19,8 @@
 		{/if}
 
 		<fieldset>
-			<Label for="form-signup.name" class="mb-2">Nome</Label>
-			<Input
+			<label for="form-signup.name" class="mb-2">Nome</label>
+			<input
 				id="form-signup.name"
 				name="name"
 				type="text"
@@ -33,8 +33,8 @@
 		</fieldset>
 
 		<fieldset>
-			<Label for="form-signup.email" class="mb-2">E-mail</Label>
-			<Input
+			<label for="form-signup.email" class="mb-2">E-mail</label>
+			<input
 				id="form-signup.email"
 				name="email"
 				type="text"
@@ -47,8 +47,8 @@
 		</fieldset>
 
 		<fieldset>
-			<Label for="form-signup.password" class="mb-2">Senha</Label>
-			<Input
+			<label for="form-signup.password" class="mb-2">Senha</label>
+			<input
 				id="form-signup.password"
 				name="password"
 				type="password"
@@ -60,8 +60,8 @@
 		</fieldset>
 
 		<fieldset>
-			<Label for="form-signup.confirm_password" class="mb-2">Confirme sua senha</Label>
-			<Input
+			<label for="form-signup.confirm_password" class="mb-2">Confirme sua senha</label>
+			<input
 				id="form-signup.confirm_password"
 				name="confirm_password"
 				type="password"

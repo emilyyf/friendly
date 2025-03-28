@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Checkbox, Input, Label } from 'flowbite-svelte';
 	import { UserStorage, getUserStore } from '$lib/userStorage.svelte';
 	import { goto } from '$app/navigation';
+	import '../../../app.css';
 
 	let email = $state('');
 	let password = $state('');
@@ -57,8 +57,8 @@
 	{#if error}{error}{/if}
 	<form class="space-y-6" onsubmit={handleSubmit}>
 		<fieldset>
-			<Label for="email" class="mb-2">E-mail</Label>
-			<Input
+			<label for="email" class="mb-2">E-mail</label>
+			<input
 				id="email"
 				name="email"
 				type="text"
@@ -70,8 +70,8 @@
 		</fieldset>
 
 		<fieldset>
-			<Label for="password" class="mb-2">Senha</Label>
-			<Input
+			<label for="password" class="mb-2">Senha</label>
+			<input
 				id="password"
 				name="password"
 				type="password"
@@ -83,7 +83,6 @@
 		</fieldset>
 
 		<div class="grid grid-cols-2">
-			<Checkbox>Manter conectado</Checkbox>
 			<div class="text-sm text-end">
 				<a href="/recover-password" class="font-semibold text-isdigo-600 hover:text-indigo-500"
 					>Esqueceu a senha?</a
