@@ -1,109 +1,68 @@
 <script lang="ts">
-	import { UserStorage, getUserStore } from '$lib/userStorage.svelte';
-	import { goto } from '$app/navigation';
+	import { superForm } from 'sveltekit-superforms/client';
 	import '../../../app.css';
 
-	let email = $state('');
-	let password = $state('');
-	let error = $state('');
+	let { data } = $props();
 
-	// This should probably be refactored
-	function handleSubmit(e: Event) {
-		e.preventDefault();
-		const user_store = getUserStore();
-		fetch('http://localhost:3000/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ email, password }),
-		})
-			.then((response) => {
-				if (response.ok) {
-					response.json().then(({ token }) => {
-						fetch('http://localhost:3000/profile', {
-							method: 'GET',
-							headers: {
-								Authorization: token,
-							},
-						})
-							.then((res) =>
-								res.json().then((user) => {
-									user_store.value = new UserStorage(user, token, true);
-									goto('/home');
-								}),
-							)
-							.catch((e) => {
-								console.log(e);
-								error = 'Failed to login';
-							});
-					});
-				} else {
-					error = 'Email ou senha inválidos';
-				}
-			})
-			.catch((e) => {
-				console.log(e);
-				error = 'Failed to login';
-			});
-	}
+	const { form, enhance, errors, message } = superForm(data.form);
 </script>
 
-<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-	Acesse sua conta
-</h2>
+<div class="flex bg-base-100 justify-center items-center flex-grow py-12">
+	<div class="p-8 w-full max-w-sm">
+		<h1 class="text-4xl font-bold mb-6">Acesse sua conta</h1>
 
-<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-	{#if error}{error}{/if}
-	<form class="space-y-6" onsubmit={handleSubmit}>
-		<fieldset>
-			<label for="email" class="mb-2">E-mail</label>
-			<input
-				id="email"
-				name="email"
-				type="text"
-				autocomplete="email"
-				placeholder="fulano@anjoamigo.com.br"
-				bind:value={email}
-				required
-			/>
-		</fieldset>
+		<form class="flex flex-col items-center" method="post" use:enhance>
+			{#if $message}
+				<div class="">
+					{$message}
+				</div>
+			{/if}
 
-		<fieldset>
-			<label for="password" class="mb-2">Senha</label>
-			<input
-				id="password"
-				name="password"
-				type="password"
-				autocomplete="current-password"
-				placeholder="•••••••••"
-				bind:value={password}
-				required
-			/>
-		</fieldset>
+			<label for="form-signup.email" class="floating-label w-full mt-3">
+				<span>E-mail</span>
+				<input
+					id="form-signup.email"
+					class="input input-md"
+					name="email"
+					type="text"
+					autocomplete="email"
+					placeholder="E-mail"
+					value={$form.email}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.email}</div>
+			</label>
 
-		<div class="grid grid-cols-2">
-			<div class="text-sm text-end">
-				<a href="/recover-password" class="font-semibold text-isdigo-600 hover:text-indigo-500"
-					>Esqueceu a senha?</a
-				>
+			<label for="form-signup.password" class="floating-label w-full mt-3">
+				<span>Senha</span>
+				<input
+					id="form-signup.password"
+					class="input input-md"
+					name="password"
+					type="password"
+					placeholder="Senha"
+					value={$form.password}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.password}</div>
+			</label>
+
+			<div class="grid grid-cols-2">
+				<div class="text-sm text-end">
+					<a href="/recover-password" class="font-semibold text-isdigo-600 hover:text-indigo-500"
+						>Esqueceu a senha?</a
+					>
+				</div>
 			</div>
-		</div>
 
-		<div>
-			<button
-				type="submit"
-				class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+			<button type="submit" class="btn btn-primary self-center mt-6 w-6xs"> Entrar </button>
+		</form>
+
+		<p class="mt-10 text-center text-sm text-gray-500">
+			Não é cadastrado?
+			<a href="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+				>Registrar-se agora</a
 			>
-				Entrar
-			</button>
-		</div>
-	</form>
-
-	<p class="mt-10 text-center text-sm text-gray-500">
-		Não é cadastrado?
-		<a href="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-			>Registrar-se agora</a
-		>
-	</p>
+		</p>
+	</div>
 </div>

@@ -24,6 +24,10 @@ export async function checkEmailAvailability(email: string): Promise<boolean> {
 	return (await db.$count(users_table, eq(users_table.email, email))) == 0;
 }
 
+export async function getUserByEmail(email: SelectUser['email']): Promise<Array<SelectUser>> {
+	return db.select().from(users_table).where(eq(users_table.email, email));
+}
+
 export async function getUserById(id: SelectUser['id']): Promise<Array<SelectUser>> {
 	return db.select().from(users_table).where(eq(users_table.id, id));
 }
