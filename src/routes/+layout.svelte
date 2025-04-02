@@ -5,25 +5,28 @@
 	let { locals } = data;
 </script>
 
-<!-- Children routes are rendered here -->
-<div class="navbar">
-	<div class="flex-none">
-		<img class="h-6 w-auto" src="https://wallpapercave.com/wp/wp10739235.png" alt="Anjo Amigo" />
-	</div>
-	<div class="flex-1">
-		<a href="/home" class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-			>Friendly</a
-		>
+<div class="min-h-screen flex flex-col">
+	<div class="navbar bg-base-100 shadow-sm">
+		<div class="flex-1">
+			<img class="h-6 w-auto" src="https://wallpapercave.com/wp/wp10739235.png" alt="Anjo Amigo" />
+		</div>
+		<div class="flex-1">
+			<a href="/home" class="btn btn-ghost text-primary-content text-xl">Friendly</a>
+		</div>
+
+		<div class="flex-none">
+			<ul class="menu menu-horizontal px-1">
+				<li><a href="/user" class="text-primary-content">{locals.user?.name ?? 'Register'}</a></li>
+				{#if locals.user}
+					<li>
+						<form method="post" action="/?/logout">
+							<button class="text-primary-content">Logout</button>
+						</form>
+					</li>
+				{/if}
+			</ul>
+		</div>
 	</div>
 
-	<div class="flex-none">
-		<ul class="menu menu-horizontal px-1">
-			<li><a href="/user">{locals.user?.name ?? 'Register'}</a></li>
-			<li><form method="post" action="/?/logout"><button>Logout</button></form></li>
-		</ul>
-	</div>
-</div>
-
-<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 	{@render children?.()}
 </div>

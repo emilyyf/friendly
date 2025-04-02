@@ -7,78 +7,76 @@
 	const { form, enhance, errors, message } = superForm(data.form);
 </script>
 
-<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-	Crie sua conta
-</h2>
-<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-	<form class="space-y-6" method="post" use:enhance>
-		{#if $message}
-			<div class="bg:red-60 p:30 m:20 font:bold fg:black r:3">
-				{$message}
-			</div>
-		{/if}
+<div class="flex bg-base-100 justify-center items-center flex-grow py-12">
+	<div class="p-8 w-full max-w-sm">
+		<h1 class="text-4xl font-bold mb-6">Crie sua conta</h1>
 
-		<fieldset>
-			<label for="form-signup.name" class="mb-2">Nome</label>
-			<input
-				id="form-signup.name"
-				name="name"
-				type="text"
-				autocomplete="name"
-				placeholder="Fulano"
-				value={$form.name}
-				required
-			/>
-			{#if $errors.name}<div class="invalid">{$errors.name}</div>{/if}
-		</fieldset>
+		<form class="flex flex-col items-center" method="post" use:enhance>
+			{#if $message}
+				<div class="">
+					{$message}
+				</div>
+			{/if}
 
-		<fieldset>
-			<label for="form-signup.email" class="mb-2">E-mail</label>
-			<input
-				id="form-signup.email"
-				name="email"
-				type="text"
-				autocomplete="email"
-				placeholder="fulano@anjoamigo.com.br"
-				value={$form.email}
-				required
-			/>
-			{#if $errors.email}<div class="invalid">{$errors.email}</div>{/if}
-		</fieldset>
+			<label for="form-signup.name" class="floating-label w-full mt-3">
+				<span>Nome</span>
+				<input
+					id="form-signup.name"
+					class="input input-md"
+					name="name"
+					type="text"
+					autocomplete="name"
+					placeholder="Nome"
+					value={$form.name}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.name}</div>
+			</label>
 
-		<fieldset>
-			<label for="form-signup.password" class="mb-2">Senha</label>
-			<input
-				id="form-signup.password"
-				name="password"
-				type="password"
-				placeholder="•••••••••"
-				value={$form.password}
-				required
-			/>
-			{#if $errors.password}<div class="invalid">{$errors.password}</div>{/if}
-		</fieldset>
+			<label for="form-signup.email" class="floating-label w-full mt-3">
+				<span>E-mail</span>
+				<input
+					id="form-signup.email"
+					class="input input-md"
+					name="email"
+					type="text"
+					autocomplete="email"
+					placeholder="E-mail"
+					value={$form.email}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.email}</div>
+			</label>
 
-		<fieldset>
-			<label for="form-signup.confirm_password" class="mb-2">Confirme sua senha</label>
-			<input
-				id="form-signup.confirm_password"
-				name="confirm_password"
-				type="password"
-				placeholder="•••••••••"
-				value={$form.confirm_password}
-				required
-			/>
-			{#if $errors.confirm}<div class="invalid">{$errors.confirm}</div>{/if}
-		</fieldset>
+			<label for="form-signup.password" class="floating-label w-full mt-3">
+				<span>Senha</span>
+				<input
+					id="form-signup.password"
+					class="input input-md"
+					name="password"
+					type="password"
+					placeholder="Senha"
+					value={$form.password}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.password}</div>
+			</label>
 
-		<div>
-			<button
-				type="submit"
-				class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-			>
-				Cadastrar
-			</button>
-		</div>
-	</form>
+			<label for="form-signup.confirm_password" class="floating-label w-full mt-3">
+				<span>Confirme sua senha</span>
+				<input
+					id="form-signup.confirm_password"
+					class="input input-md"
+					name="confirm_password"
+					type="password"
+					placeholder="Confirmação"
+					value={$form.confirm_password}
+					required
+				/>
+				<div class="text-error text-center text-xs mt-1">{$errors.confirm_password}</div>
+			</label>
+
+			<button type="submit" class="btn btn-primary self-center mt-6 w-6xs"> Cadastrar </button>
+		</form>
+	</div>
 </div>

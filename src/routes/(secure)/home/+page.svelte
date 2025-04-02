@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { UserStorage, getUser } from '$lib/userStorage.svelte';
-
-	let user: UserStorage = getUser();
 	let { data } = $props();
 	let { locals } = data;
 </script>
 
-<div>
+<div class="bg-base-100 min-h-screen flex flex-col justify-center items-center">
 	<h1>Anjo Amigo</h1>
 	{#if locals.user}
 		<h2>Hello {locals.user.name}</h2>

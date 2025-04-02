@@ -16,5 +16,5 @@ export const schema = z
 	})
 	.refine((data) => data.password == data.confirm_password, {
 		message: "Passwords don't match",
-		path: ['confirm'],
+		path: ['confirm_password'],
 	});
