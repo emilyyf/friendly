@@ -62,18 +62,18 @@
 				<div class="text-error text-center text-xs mt-1">{$errors.password}</div>
 			</label>
 
-			<label for="form-signup.confirm_password" class="floating-label w-full mt-3">
+			<label for="form-signup.confirmPassword" class="floating-label w-full mt-3">
 				<span>Confirme sua senha</span>
 				<input
-					id="form-signup.confirm_password"
+					id="form-signup.confirmPassword"
 					class="input input-md"
-					name="confirm_password"
+					name="confirmPassword"
 					type="password"
 					placeholder="Confirmação"
-					value={$form.confirm_password}
+					value={$form.confirmPassword}
 					required
 				/>
-				<div class="text-error text-center text-xs mt-1">{$errors.confirm_password}</div>
+				<div class="text-error text-center text-xs mt-1">{$errors.confirmPassword}</div>
 			</label>
 
 			<button type="submit" class="btn btn-primary self-center mt-6 w-6xs"> Cadastrar </button>

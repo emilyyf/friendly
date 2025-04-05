@@ -40,7 +40,7 @@ export default [
 				},
 				{
 					selector: 'variable',
-					format: ['snake_case', 'UPPER_CASE'],
+					format: ['camelCase', 'UPPER_CASE'],
 					leadingUnderscore: 'allow',
 					trailingUnderscore: 'allow',
 				},

@@ -24,14 +24,14 @@ export const actions = {
 		if (!form.valid) return fail(400, { form });
 
 		const user = (await getUserByEmail(email))[0];
-		const valid_password = await verifyPasswordHash(user.password, password);
+		const validPassword = await verifyPasswordHash(user.password, password);
 
-		if (!valid_password) return fail(400, { form });
+		if (!validPassword) return fail(400, { form });
 
-		const session_token = generateSessionToken();
-		const session = await createSession(session_token, user.id);
+		const sessionToken = generateSessionToken();
+		const session = await createSession(sessionToken, user.id);
 
-		setSessionTokenCookie(event, session.id, session.expires_at);
+		setSessionTokenCookie(event, session.id, session.expiresAt);
 
 		redirect(302, '/home');
 	},

@@ -12,9 +12,9 @@ export const schema = z
 		password: z
 			.string()
 			.refine(async (val) => await verifyPasswordStrength(val), { message: 'Weak password' }),
-		confirm_password: z.string(),
+		confirmPassword: z.string(),
 	})
-	.refine((data) => data.password == data.confirm_password, {
+	.refine((data) => data.password == data.confirmPassword, {
 		message: "Passwords don't match",
-		path: ['confirm_password'],
+		path: ['confirmPassword'],
 	});

@@ -7,14 +7,14 @@ export async function createUser(
 	email: string,
 	password: string,
 ): Promise<SelectUser> {
-	const password_hash = await hashPassword(password);
+	const passwordHash = await hashPassword(password);
 	const user: InsertUser = {
 		name,
 		email,
-		password: password_hash,
+		password: passwordHash,
 		verified: true,
 	};
 
-	const new_user = await insertUser(user);
-	return new_user[0];
+	const newUser = await insertUser(user);
+	return newUser[0];
 }

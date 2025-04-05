@@ -23,9 +23,9 @@ export const actions = {
 		if (!form.valid) return fail(400, { form });
 
 		const user = await createUser(name, email, password);
-		const session_token = generateSessionToken();
-		const session = await createSession(session_token, user.id);
-		setSessionTokenCookie(event, session.id, session.expires_at);
+		const sessionToken = generateSessionToken();
+		const session = await createSession(sessionToken, user.id);
+		setSessionTokenCookie(event, session.id, session.expiresAt);
 
 		redirect(302, '/home');
 	},

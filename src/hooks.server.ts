@@ -6,12 +6,12 @@ import { sequence } from '@sveltejs/kit/hooks';
 const auth = (async ({ event, resolve }) => {
 	const { cookies } = event;
 	const token = cookies.get('session');
-	const secure_route = event.route.id?.includes('(secure)');
-	const login_route = event.url.pathname.includes('/login');
-	const registration_route = event.url.pathname.includes('/register');
-	const auth_route = login_route || registration_route;
+	const secureRoute = event.route.id?.includes('(secure)');
+	const loginRoute = event.url.pathname.includes('/login');
+	const registrationRoute = event.url.pathname.includes('/register');
+	const authRoute = loginRoute || registrationRoute;
 
-	if (token && secure_route) {
+	if (token && secureRoute) {
 		const session = await getSessionById(token);
 
 		if (session) {
@@ -24,13 +24,13 @@ const auth = (async ({ event, resolve }) => {
 		}
 	}
 
-	if (secure_route) {
+	if (secureRoute) {
 		if (!event.locals.user || !token) {
 			await logout(event);
 		}
 	}
 
-	if (token && auth_route) {
+	if (token && authRoute) {
 		redirect(303, '/home');
 	}
 

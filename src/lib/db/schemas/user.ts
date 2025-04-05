@@ -2,7 +2,7 @@ import { integer, pgTable, varchar, boolean, timestamp } from 'drizzle-orm/pg-co
 import { eq } from 'drizzle-orm';
 import { db } from '..';
 
-export const users_table = pgTable('users', {
+export const usersTable = pgTable('users', {
 	id: integer().primaryKey().generatedAlwaysAsIdentity(),
 	name: varchar({ length: 255 }).notNull(),
 	email: varchar({ length: 255 }).notNull().unique(),
@@ -10,28 +10,28 @@ export const users_table = pgTable('users', {
 	verified: boolean().notNull(),
 	password: varchar({ length: 255 }).notNull(),
 	role: varchar({ length: 255 }),
-	created_at: timestamp().notNull().defaultNow(),
-	updated_at: timestamp()
+	createdAt: timestamp().notNull().defaultNow(),
+	updatedAt: timestamp()
 		.notNull()
 		.defaultNow()
 		.$onUpdate(() => new Date()),
 });
 
-export type InsertUser = typeof users_table.$inferInsert;
-export type SelectUser = typeof users_table.$inferSelect;
+export type InsertUser = typeof usersTable.$inferInsert;
+export type SelectUser = typeof usersTable.$inferSelect;
 
 export async function checkEmailAvailability(email: string): Promise<boolean> {
-	return (await db.$count(users_table, eq(users_table.email, email))) == 0;
+	return (await db.$count(usersTable, eq(usersTable.email, email))) == 0;
 }
 
 export async function getUserByEmail(email: SelectUser['email']): Promise<Array<SelectUser>> {
-	return db.select().from(users_table).where(eq(users_table.email, email));
+	return db.select().from(usersTable).where(eq(usersTable.email, email));
 }
 
 export async function getUserById(id: SelectUser['id']): Promise<Array<SelectUser>> {
-	return db.select().from(users_table).where(eq(users_table.id, id));
+	return db.select().from(usersTable).where(eq(usersTable.id, id));
 }
 
 export async function insertUser(data: InsertUser): Promise<Array<SelectUser>> {
-	return await db.insert(users_table).values(data).returning();
+	return await db.insert(usersTable).values(data).returning();
 }
