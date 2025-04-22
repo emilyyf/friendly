@@ -1,5 +1,4 @@
-import type { Action } from '@sveltejs/kit';
-import type { RequestEvent } from './$types';
+import type { RequestEvent, Actions } from './$types';
 import { deleteSession } from '$lib/db/schemas/session';
 import { redirect } from '@sveltejs/kit';
 
@@ -17,4 +16,4 @@ export const actions = {
 		});
 		redirect(302, '/login');
 	},
-} satisfies Action;
+} satisfies Actions;
