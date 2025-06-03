@@ -1,0 +1,2081 @@
+{
+  "id": "dcbcf22d-5b67-4ae2-ba48-a63417ca585e",
+  "prevId": "b57eb2f1-1c40-478d-8f72-5871b937a3f1",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.appointments": {
+      "name": "appointments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "appointments_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "child_id": {
+          "name": "child_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "ig": {
+          "name": "ig",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight": {
+          "name": "weight",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pa": {
+          "name": "pa",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "au": {
+          "name": "au",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bcf": {
+          "name": "bcf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "appointments_child_id_children_id_fk": {
+          "name": "appointments_child_id_children_id_fk",
+          "tableFrom": "appointments",
+          "tableTo": "children",
+          "columnsFrom": [
+            "child_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "appointments_create_log_id_logs_id_fk": {
+          "name": "appointments_create_log_id_logs_id_fk",
+          "tableFrom": "appointments",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "appointments_update_log_id_logs_id_fk": {
+          "name": "appointments_update_log_id_logs_id_fk",
+          "tableFrom": "appointments",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.children": {
+      "name": "children",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "children_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "household_id": {
+          "name": "household_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mother_id": {
+          "name": "mother_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "birth": {
+          "name": "birth",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "age": {
+          "name": "age",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "local": {
+          "name": "local",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "race": {
+          "name": "race",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alive_birth_certificate": {
+          "name": "alive_birth_certificate",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_certificate": {
+          "name": "birth_certificate",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rg": {
+          "name": "rg",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sus_card": {
+          "name": "sus_card",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blood_type": {
+          "name": "blood_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight_at_birth": {
+          "name": "weight_at_birth",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height_at_birth": {
+          "name": "height_at_birth",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_apgar": {
+          "name": "first_apgar",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fifth_apgar": {
+          "name": "fifth_apgar",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "neonatal_heel_prick": {
+          "name": "neonatal_heel_prick",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hear_test": {
+          "name": "hear_test",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hearing_triage": {
+          "name": "hearing_triage",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "eye_test": {
+          "name": "eye_test",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "od": {
+          "name": "od",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "oe": {
+          "name": "oe",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pregnancy_time": {
+          "name": "pregnancy_time",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "login": {
+          "name": "login",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "msd": {
+          "name": "msd",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mmii": {
+          "name": "mmii",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "children_household_id_households_id_fk": {
+          "name": "children_household_id_households_id_fk",
+          "tableFrom": "children",
+          "tableTo": "households",
+          "columnsFrom": [
+            "household_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "children_mother_id_persons_id_fk": {
+          "name": "children_mother_id_persons_id_fk",
+          "tableFrom": "children",
+          "tableTo": "persons",
+          "columnsFrom": [
+            "mother_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "children_create_log_id_logs_id_fk": {
+          "name": "children_create_log_id_logs_id_fk",
+          "tableFrom": "children",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "children_update_log_id_logs_id_fk": {
+          "name": "children_update_log_id_logs_id_fk",
+          "tableFrom": "children",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.exams": {
+      "name": "exams",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "exams_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "medical_history_id": {
+          "name": "medical_history_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "result": {
+          "name": "result",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "igm": {
+          "name": "igm",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "igg": {
+          "name": "igg",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "exams_medical_history_id_medical_histories_id_fk": {
+          "name": "exams_medical_history_id_medical_histories_id_fk",
+          "tableFrom": "exams",
+          "tableTo": "medical_histories",
+          "columnsFrom": [
+            "medical_history_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "exams_create_log_id_logs_id_fk": {
+          "name": "exams_create_log_id_logs_id_fk",
+          "tableFrom": "exams",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "exams_update_log_id_logs_id_fk": {
+          "name": "exams_update_log_id_logs_id_fk",
+          "tableFrom": "exams",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.households": {
+      "name": "households",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "households_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "code": {
+          "name": "code",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "adress": {
+          "name": "adress",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adress_number": {
+          "name": "adress_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adress_complement": {
+          "name": "adress_complement",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cep": {
+          "name": "cep",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "neighborhood": {
+          "name": "neighborhood",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "residence_type": {
+          "name": "residence_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rent_value": {
+          "name": "rent_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_material": {
+          "name": "building_material",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "in_house_bathroom": {
+          "name": "in_house_bathroom",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "residents": {
+          "name": "residents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rooms": {
+          "name": "rooms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "beds": {
+          "name": "beds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "car": {
+          "name": "car",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "television": {
+          "name": "television",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refrigerator": {
+          "name": "refrigerator",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "microwave": {
+          "name": "microwave",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "washing_machine": {
+          "name": "washing_machine",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "road_type": {
+          "name": "road_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refering_person": {
+          "name": "refering_person",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "households_create_log_id_logs_id_fk": {
+          "name": "households_create_log_id_logs_id_fk",
+          "tableFrom": "households",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "households_update_log_id_logs_id_fk": {
+          "name": "households_update_log_id_logs_id_fk",
+          "tableFrom": "households",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.logs": {
+      "name": "logs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "logs_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(2000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "action": {
+          "name": "action",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "table": {
+          "name": "table",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "row_id": {
+          "name": "row_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "logs_user_id_users_id_fk": {
+          "name": "logs_user_id_users_id_fk",
+          "tableFrom": "logs",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.medical_histories": {
+      "name": "medical_histories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "medical_histories_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "smoker": {
+          "name": "smoker",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alcohool": {
+          "name": "alcohool",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abortations": {
+          "name": "abortations",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vaginal_deliveries": {
+          "name": "vaginal_deliveries",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "c_sections": {
+          "name": "c_sections",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pregnancy": {
+          "name": "pregnancy",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blood_type": {
+          "name": "blood_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blood_glucose": {
+          "name": "blood_glucose",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "syphilis": {
+          "name": "syphilis",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hiv": {
+          "name": "hiv",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "medical_histories_person_id_persons_id_fk": {
+          "name": "medical_histories_person_id_persons_id_fk",
+          "tableFrom": "medical_histories",
+          "tableTo": "persons",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "medical_histories_create_log_id_logs_id_fk": {
+          "name": "medical_histories_create_log_id_logs_id_fk",
+          "tableFrom": "medical_histories",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "medical_histories_update_log_id_logs_id_fk": {
+          "name": "medical_histories_update_log_id_logs_id_fk",
+          "tableFrom": "medical_histories",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.notes": {
+      "name": "notes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "notes_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "child_id": {
+          "name": "child_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(2000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "notes_child_id_children_id_fk": {
+          "name": "notes_child_id_children_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "children",
+          "columnsFrom": [
+            "child_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notes_person_id_persons_id_fk": {
+          "name": "notes_person_id_persons_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "persons",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notes_create_log_id_logs_id_fk": {
+          "name": "notes_create_log_id_logs_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notes_update_log_id_logs_id_fk": {
+          "name": "notes_update_log_id_logs_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.participations": {
+      "name": "participations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "participations_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "child_id": {
+          "name": "child_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(2000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "participations_child_id_children_id_fk": {
+          "name": "participations_child_id_children_id_fk",
+          "tableFrom": "participations",
+          "tableTo": "children",
+          "columnsFrom": [
+            "child_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "participations_create_log_id_logs_id_fk": {
+          "name": "participations_create_log_id_logs_id_fk",
+          "tableFrom": "participations",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "participations_update_log_id_logs_id_fk": {
+          "name": "participations_update_log_id_logs_id_fk",
+          "tableFrom": "participations",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.persons": {
+      "name": "persons",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "persons_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "household_id": {
+          "name": "household_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "birth": {
+          "name": "birth",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "age": {
+          "name": "age",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uf": {
+          "name": "uf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "graduation": {
+          "name": "graduation",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rg": {
+          "name": "rg",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rg_exp": {
+          "name": "rg_exp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sus_card": {
+          "name": "sus_card",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "card_series": {
+          "name": "card_series",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "card_uf": {
+          "name": "card_uf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company": {
+          "name": "company",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "work_function": {
+          "name": "work_function",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employment_card": {
+          "name": "employment_card",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hiring_date": {
+          "name": "hiring_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "resignation_date": {
+          "name": "resignation_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary": {
+          "name": "salary",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "extra_income": {
+          "name": "extra_income",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "persons_household_id_households_id_fk": {
+          "name": "persons_household_id_households_id_fk",
+          "tableFrom": "persons",
+          "tableTo": "households",
+          "columnsFrom": [
+            "household_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "persons_create_log_id_logs_id_fk": {
+          "name": "persons_create_log_id_logs_id_fk",
+          "tableFrom": "persons",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "persons_update_log_id_logs_id_fk": {
+          "name": "persons_update_log_id_logs_id_fk",
+          "tableFrom": "persons",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.personVaccines": {
+      "name": "personVaccines",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "personVaccines_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dosage_id": {
+          "name": "dosage_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "medical_history_id": {
+          "name": "medical_history_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "personVaccines_person_id_persons_id_fk": {
+          "name": "personVaccines_person_id_persons_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "persons",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "personVaccines_vaccine_id_vaccines_id_fk": {
+          "name": "personVaccines_vaccine_id_vaccines_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "vaccines",
+          "columnsFrom": [
+            "vaccine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "personVaccines_dosage_id_vaccineDosages_id_fk": {
+          "name": "personVaccines_dosage_id_vaccineDosages_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "vaccineDosages",
+          "columnsFrom": [
+            "dosage_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "personVaccines_medical_history_id_medical_histories_id_fk": {
+          "name": "personVaccines_medical_history_id_medical_histories_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "medical_histories",
+          "columnsFrom": [
+            "medical_history_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "personVaccines_create_log_id_logs_id_fk": {
+          "name": "personVaccines_create_log_id_logs_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "personVaccines_update_log_id_logs_id_fk": {
+          "name": "personVaccines_update_log_id_logs_id_fk",
+          "tableFrom": "personVaccines",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.scholarships": {
+      "name": "scholarships",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "scholarships_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "child_id": {
+          "name": "child_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grade": {
+          "name": "grade",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "school": {
+          "name": "school",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "year": {
+          "name": "year",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "period": {
+          "name": "period",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "scholarships_child_id_children_id_fk": {
+          "name": "scholarships_child_id_children_id_fk",
+          "tableFrom": "scholarships",
+          "tableTo": "children",
+          "columnsFrom": [
+            "child_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scholarships_create_log_id_logs_id_fk": {
+          "name": "scholarships_create_log_id_logs_id_fk",
+          "tableFrom": "scholarships",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scholarships_update_log_id_logs_id_fk": {
+          "name": "scholarships_update_log_id_logs_id_fk",
+          "tableFrom": "scholarships",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sessions": {
+      "name": "sessions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ultrassonographies": {
+      "name": "ultrassonographies",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "ultrassonographies_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "child_id": {
+          "name": "child_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "medical_history_id": {
+          "name": "medical_history_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "weight": {
+          "name": "weight",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "percentage": {
+          "name": "percentage",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bcf": {
+          "name": "bcf",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ila": {
+          "name": "ila",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "liqam": {
+          "name": "liqam",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placenta": {
+          "name": "placenta",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "degree": {
+          "name": "degree",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ultrassonographies_child_id_children_id_fk": {
+          "name": "ultrassonographies_child_id_children_id_fk",
+          "tableFrom": "ultrassonographies",
+          "tableTo": "children",
+          "columnsFrom": [
+            "child_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ultrassonographies_medical_history_id_medical_histories_id_fk": {
+          "name": "ultrassonographies_medical_history_id_medical_histories_id_fk",
+          "tableFrom": "ultrassonographies",
+          "tableTo": "medical_histories",
+          "columnsFrom": [
+            "medical_history_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ultrassonographies_create_log_id_logs_id_fk": {
+          "name": "ultrassonographies_create_log_id_logs_id_fk",
+          "tableFrom": "ultrassonographies",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "ultrassonographies_update_log_id_logs_id_fk": {
+          "name": "ultrassonographies_update_log_id_logs_id_fk",
+          "tableFrom": "ultrassonographies",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "users_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "photo": {
+          "name": "photo",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verified": {
+          "name": "verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.vaccineDosages": {
+      "name": "vaccineDosages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "vaccineDosages_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "vaccineDosages_vaccine_id_vaccines_id_fk": {
+          "name": "vaccineDosages_vaccine_id_vaccines_id_fk",
+          "tableFrom": "vaccineDosages",
+          "tableTo": "vaccines",
+          "columnsFrom": [
+            "vaccine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "vaccineDosages_create_log_id_logs_id_fk": {
+          "name": "vaccineDosages_create_log_id_logs_id_fk",
+          "tableFrom": "vaccineDosages",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "vaccineDosages_update_log_id_logs_id_fk": {
+          "name": "vaccineDosages_update_log_id_logs_id_fk",
+          "tableFrom": "vaccineDosages",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.vaccines": {
+      "name": "vaccines",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "vaccines_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_log_id": {
+          "name": "create_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_log_id": {
+          "name": "update_log_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "vaccines_create_log_id_logs_id_fk": {
+          "name": "vaccines_create_log_id_logs_id_fk",
+          "tableFrom": "vaccines",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "create_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "vaccines_update_log_id_logs_id_fk": {
+          "name": "vaccines_update_log_id_logs_id_fk",
+          "tableFrom": "vaccines",
+          "tableTo": "logs",
+          "columnsFrom": [
+            "update_log_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

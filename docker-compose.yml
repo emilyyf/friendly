@@ -11,7 +11,7 @@ services:
       - .:/friendly
     depends_on:
       - postgres
-    command: bun run dev
+    command: sh -c "bun drizzle-kit migrate && bun run dev"
   postgres:
     image: postgres:latest
     container_name: postgres
