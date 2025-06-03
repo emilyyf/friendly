@@ -8,6 +8,13 @@
       "when": 1742653619738,
       "tag": "0000_sleepy_crusher_hogan",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1748983169036,
+      "tag": "0001_smart_sentry",
+      "breakpoints": true
     }
   ]
 }
